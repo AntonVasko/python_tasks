@@ -1,3 +1,5 @@
+import PyQt6
+
 class Cassa():
     def __init__(self):
         self.products = {'Молоко': 75,
@@ -48,7 +50,6 @@ class Cassa():
 
     def doCheck(self):
         purchases = self.doPurchases()
-        result = 0
         for i in range(1, len(purchases)+1):
             about_product = dict()
             product = list(purchases)[i-1]
@@ -68,7 +69,7 @@ class Cassa():
             about_product['Сумма без скидки'] = ammount_price
             self.check.append(about_product)
     
-    def showPurchases(self):
+    def showPurchases(self): #Консольный вывод для тестов
         x = 16
         result = 0
         print(f"{'Наименование':{x}}{'Количество':{x}}{'Цена-Руб.':{x}}{'Стоимость-Руб.ыыы':{x}}")
@@ -81,6 +82,11 @@ class Cassa():
                 print(f"Цена без скидки: {purchases['Цена']}", end='    ')
                 print(f"Стоимость без скидки: {purchases['Сумма без скидки']}")
         print('ИТОГО:', str(result) + '-Руб.')
+
+
+
+
+
 cassa = Cassa()
 cassa.showProducts()
 cassa.doCheck()
