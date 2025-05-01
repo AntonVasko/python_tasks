@@ -58,10 +58,11 @@ def zero():
 def percents():
     nums = ui.lineEdit.text().split()
     if checkLen():
-        num = nums[2]
-        num *= nums[0]
+        num = float(nums[2])
+        num *= float(nums[0])
         num /= 100
-        ui.lineEdit.setText(str(nums[0]), nums[1], str(num))
+        ans = nums[0] + ' ' + nums[1] + ' ' + str(num)
+        ui.lineEdit.setText(ans)
 
 def CE():
     nums = ui.lineEdit.text().split()
@@ -96,32 +97,61 @@ def erase():
 def showSqrt():
     nums = ui.lineEdit.text().split()
     if 0 < len(nums) < 3:
-        num = int(nums[0])
+        num = float(nums[0])
         num **= 1/2
         num = round(num, 3)
         ui.lineEdit.setText(str(num))
     if len(nums) == 3:
-        num = int(nums[2])
+        num = float(nums[2])
         num **= 1/2
         num = round(num, 3)
-        line = str(nums[0], nums[1], str(num))
-        print(line)
+        line = nums[0] + ' ' + nums[1] + ' ' + str(num)
         ui.lineEdit.setText(line)
 
 def square():
     nums = ui.lineEdit.text().split()
     if 0 < len(nums) < 3:
-        num = int(nums[0])
-        num *= num
+        num = float(nums[0])
+        num **= 2
+        num = round(num, 3)
         ui.lineEdit.setText(str(num))
     if len(nums) == 3:
-        num = int(nums[2])
-        num *= num
-        line = str(nums[0], nums[1], num)
-        print(line)
+        num = float(nums[2])
+        num **= 2
+        num = round(num, 3)
+        line = nums[0] + ' ' + nums[1] + ' ' + str(num)
         ui.lineEdit.setText(line)
 
+def oneToX():
+    nums = ui.lineEdit.text().split()
+    if 0 < len(nums) < 3:
+        num = float(nums[0])
+        num = 1/num
+        num = round(num, 3)
+        ui.lineEdit.setText(str(num))
+    if len(nums) == 3:
+        num = float(nums[2])
+        num = 1/num
+        num = round(num, 3)
+        line = nums[0] + ' ' + nums[1] + ' ' + str(num)
+        ui.lineEdit.setText(line)
 
+def chSgn():
+    nums = ui.lineEdit.text().split()
+    if 0 < len(nums) < 3:
+        num = float(nums[0])
+        num *= -1
+        num = round(num, 3)
+        ui.lineEdit.setText(str(num))
+    if len(nums) == 3:
+        num = float(nums[2])
+        num *= -1
+        num = round(num, 3)
+        line = nums[0] + ' ' + nums[1] + ' ' + str(num)
+        ui.lineEdit.setText(line)
+
+def dot():
+    ui.lineEdit.setText(ui.lineEdit.text() + '.')
 
 def one():
     ui.lineEdit.setText(ui.lineEdit.text() + '1')
@@ -150,30 +180,35 @@ def eight():
 def nine():
     ui.lineEdit.setText(ui.lineEdit.text() + '9')
 
-
-    
 app = QApplication(sys.argv)
 window = QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(window)
 
-ui.pushButton_23.clicked.connect(plus)
-ui.pushButton_21.clicked.connect(multiply)
 ui.pushButton_9.clicked.connect(division)
-ui.pushButton_14.clicked.connect(zero)
-ui.pushButton_6.clicked.connect(one)
-ui.pushButton_15.clicked.connect(two)
+ui.pushButton_20.clicked.connect(dot)
+ui.pushButton_24.clicked.connect(showEq)
+ui.pushButton_2.clicked.connect(percents)
 ui.pushButton_19.clicked.connect(three)
-ui.pushButton_5.clicked.connect(four)
-ui.pushButton_16.clicked.connect(five)
-ui.pushButton_18.clicked.connect(six)
+ui.pushButton_8.clicked.connect(showSqrt)
 ui.pushButton.clicked.connect(seven)
-ui.pushButton_13.clicked.connect(eight)
+ui.pushButton_15.clicked.connect(two)
+ui.pushButton_4.clicked.connect(square)
+ui.pushButton_14.clicked.connect(zero)
+ui.pushButton_3.clicked.connect(oneToX)
 ui.pushButton_17.clicked.connect(nine)
 ui.pushButton_22.clicked.connect(minus)
-ui.pushButton_24.clicked.connect(showEq)
+ui.pushButton_5.clicked.connect(four)
+ui.pushButton_10.clicked.connect(CE)
+ui.pushButton_21.clicked.connect(multiply)
+ui.pushButton_7.clicked.connect(chSgn)
+ui.pushButton_13.clicked.connect(eight)
+ui.pushButton_23.clicked.connect(plus)
+ui.pushButton_18.clicked.connect(six)
+ui.pushButton_6.clicked.connect(one)
 ui.pushButton_12.clicked.connect(erase)
-ui.pushButton_8.clicked.connect(showSqrt)
+ui.pushButton_11.clicked.connect(C)
+ui.pushButton_16.clicked.connect(five)
 
 window.show()
 sys.exit(app.exec())

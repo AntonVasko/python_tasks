@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>icons/arrow_forward_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>icons/groups_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>icons/Russian_rouble_sign_(PT_Serif_1.000).svg.png</file>
+    <file>icons/lock_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>icons/mail_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>icons/person_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>icons/add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>icons/add_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>icons/done_outline_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>icons/favorite_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>icons/OR_icon.png</file>
+    <file>icons/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png</file>
+  </qresource>
+  <qresource prefix="images">
+    <file>images/1514366899147280970.jpg</file>
+    <file>images/1514366939164988177.jpg</file>
+    <file>images/1514366999150635677.jpg</file>
+    <file>images/1514367031115049152.jpg</file>
+    <file>images/1514367147156184546.jpg</file>
+  </qresource>
+</RCC>
