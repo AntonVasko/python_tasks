@@ -73,3 +73,4 @@ for el in names:
         cursor.execute(f"SELECT title FROM courses WHERE id = {i}")
         goes.append(str(cursor.fetchone()).lstrip('(').rstrip(',)'))
     print(f"{el} ходит на такие курсы: {', '.join(goes)}")
+conn.close()
