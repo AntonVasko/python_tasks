@@ -4,9 +4,24 @@ import os
 from PyQt6.QtWidgets import QApplication, QDialog, QMessageBox
 from cassa_ui import Ui_Ui_Dialog
 import json
+import sqlite3
 
-with open('cassa.json', encoding='utf-8') as f:
-    data = json.load(f)
+try:
+    conn = sqlite3.connect("cassa.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM products")
+    data = list(cursor.fetchall())
+    for i in range(len(data)):
+        data[i] = tuple(list(data[i])[1:])
+except:
+    with open('cassa.json') as f:
+        file = json.load(f)
+        data = []
+        for el in file:
+            pr = file[el]
+            data.append((el, pr['Цена'], pr['Скидка'], pr['Цена со скидкой']))
+
+print(data)
 
 app = QApplication(sys.argv)
 window = QDialog()
@@ -39,13 +54,13 @@ class Cassa():
         self.buybtn.clicked.connect(self.buy)
 
     def show_products(self):
-        for el in self.data:
-            text = el
+        for i in range(len(data)):
+            text = data[i][0]
             text += ' | Было: '
-            text += str(data[el]['Цена'])
+            text += str(data[i][1])
             text += '₽'
             text += ' | Стало: '
-            text += str(data[el]['Цена со скидкой'])
+            text += str(data[i][3])
             text += '₽'
             self.obj.addItem(text)
 
@@ -53,18 +68,22 @@ class Cassa():
         self.purchases.clear()
         text = self.obj.selectedItems()[0].text()
         name = text.split()[0]
+        for i in range(len(data)):
+            if name in data[i]:
+                ind = i
+                break
         try:
             self.purchases_ammount[name] += 1
         except:
             self.purchases_ammount[name] = 1
         text = name
         text += ' '
-        self.summ += self.data[name]['Цена со скидкой'] 
-        text += str(self.data[name]['Цена со скидкой'])
+        self.summ += self.data[ind][3] 
+        text += str(self.data[ind][3])
         text += '₽ '
         text += str(self.purchases_ammount[name])
         text += ' '
-        text += str(round(self.purchases_ammount[name] * self.data[name]['Цена со скидкой'], 2))
+        text += str(round(self.purchases_ammount[name] * self.data[ind][3], 2))
         text += '₽'
         for el in self.purchases_text:
             if name == el:
@@ -79,15 +98,19 @@ class Cassa():
         text = self.purchases.selectedItems()[0].text()
         self.purchases.clear()
         name = text.split()[0]
+        for i in range(len(data)):
+            if name in data[i]:
+                ind = i
+                break
         self.purchases_ammount[name] -= 1
         text = name
         text += ' '
-        self.summ -= self.data[name]['Цена со скидкой']
-        text += str(self.data[name]['Цена со скидкой'])
+        self.summ -= self.data[ind][3]
+        text += str(self.data[ind][3])
         text += '₽ '
         text += str(self.purchases_ammount[name])
         text += ' '
-        text += str(round(self.purchases_ammount[name] * self.data[name]['Цена со скидкой'], 2))
+        text += str(round(self.purchases_ammount[name] * self.data[ind][3], 2))
         text += '₽'
         for el in self.purchases_text:
             if name == el:

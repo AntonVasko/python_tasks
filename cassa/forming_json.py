@@ -98,6 +98,7 @@ class Cassa():
 
 cassa = Cassa()
 cassa.cassa_products()
+cassa.showProducts()
 
 with open('cassa.json', 'w', encoding='utf-8') as f:
     json.dump(cassa.to_json, f)
