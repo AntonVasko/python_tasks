@@ -4,6 +4,8 @@ import json
 conn = sqlite3.connect("cassa.db")
 cursor = conn.cursor()
 
+cursor.execute("DROP TABLE IF EXISTS products")
+
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,7 +19,8 @@ cursor.execute("""
         name TEXT NOT NULL,
         price INTEGER,
         discount TEXT,
-        discounted_price INTEGER
+        discounted_price INTEGER,
+        ammount INTEGER
     )
 """)
 
@@ -40,17 +43,15 @@ cursor.execute("""
     )
 """)
 
-
-
 with open('cassa.json') as f:
     data = json.load(f)
 to_ins = []
 for el in data:
     pr = data[el]
-    to_ins.append((el, pr['Цена'], pr['Скидка'], pr['Цена со скидкой']))
+    to_ins.append((el, pr['Цена'], pr['Скидка'], pr['Цена со скидкой'], 15))
 
 cursor.executemany('''
-    INSERT INTO products(name, price, discount, discounted_price) VALUES (?, ?, ?, ?)
+    INSERT INTO products(name, price, discount, discounted_price, ammount) VALUES (?, ?, ?, ?, ?)
 ''', to_ins)
 
 
@@ -64,7 +65,10 @@ cursor.execute("SELECT * FROM checks")
 print(cursor.fetchall())
 cursor.execute("SELECT * FROM products_checks")
 print(cursor.fetchall())
-
-
+"""cursor.execute("SELECT ammount FROM products WHERE name == 'Молоко'")
+ins = int(cursor.fetchone()[0]) - 1
+cursor.execute(f'''INSERT INTO products(ammount) VALUES (1)''')
+cursor.execute("SELECT ammount FROM products WHERE name == 'Молоко'")
+print(cursor.fetchone)"""
 conn.commit()
 conn.close()

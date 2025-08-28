@@ -47,27 +47,39 @@ class Cassa():
         self.purchases_ammount = dict()
         self.summ = 0
 
+        self.form_ammount_dictionary()
         self.show_products()
         self.obj.itemClicked.connect(self.to_purchases)
         self.purchases.itemClicked.connect(self.dell)
         self.canc.clicked.connect(self.cancel)
         self.buybtn.clicked.connect(self.buy)
 
+    def form_ammount_dictionary(self):
+        self.ammountd = dict()
+        for el in self.data:
+            element_name = el[0]
+            cursor.execute(f"SELECT ammount FROM products WHERE name == '{element_name}'")
+            self.ammountd[element_name] = int(cursor.fetchone()[0])
+
     def show_products(self):
+        self.obj.clear()
         for i in range(len(data)):
-            text = data[i][0]
-            text += ' | Было: '
-            text += str(data[i][1])
-            text += '₽'
-            text += ' | Стало: '
-            text += str(data[i][3])
-            text += '₽'
-            self.obj.addItem(text)
+            print(self.ammountd[data[i][0]])
+            if self.ammountd[data[i][0]] != 0:
+                text = data[i][0]
+                text += ' | Было: '
+                text += str(data[i][1])
+                text += '₽'
+                text += ' | Стало: '
+                text += str(data[i][3])
+                text += '₽'
+                self.obj.addItem(text)
 
     def to_purchases(self):
         self.purchases.clear()
         text = self.obj.selectedItems()[0].text()
         name = text.split()[0]
+        self.ammountd[name] -= 1
         for i in range(len(data)):
             if name in data[i]:
                 ind = i
@@ -93,11 +105,14 @@ class Cassa():
             if self.purchases_ammount[el] != 0:
                 self.purchases.addItem(self.purchases_text[el])
         self.slabel.setText(str(round(self.summ, 2)))
+        self.show_products()
+        
 
     def dell(self):
         text = self.purchases.selectedItems()[0].text()
         self.purchases.clear()
         name = text.split()[0]
+        self.ammountd[name] += 1
         for i in range(len(data)):
             if name in data[i]:
                 ind = i
@@ -120,6 +135,8 @@ class Cassa():
             if self.purchases_ammount[el] != 0:
                 self.purchases.addItem(self.purchases_text[el])
         self.slabel.setText(str(round(self.summ, 2)))
+        self.ammountd[name] -= 1
+        self.show_products()
 
     def cancel(self):
         self.purchases_ammount = dict()
