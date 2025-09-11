@@ -2,6 +2,7 @@ def fibb(x):
     if x <= 1:
         return x
     return fibb(x-1) + fibb(x-2)
+ 
 
 def sum_num(snum, ans=0):
     x = len(snum)-1

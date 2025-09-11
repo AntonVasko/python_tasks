@@ -13,11 +13,11 @@ class BoxColours(GridLayout):
         self.cols = 3
         for i in range(9):
             self.btn = Button(text = 'Нажми!', background_color = random_color())
-            self.btn.bind(on_press = self.on_event)
+            self.btn.bind(on_press = lambda x: self.random_color(x))
             self.add_widget(self.btn)
-        
-    def on_event(self, obj):
-        obj.background_color = random_color()
+
+    def random_color(self, obj):
+        obj.background_color = (randint(0,100)/100, randint(0,100)/100, randint(0,100)/100, 1)
         
 class ColoursApp(App):
     def build(self):

@@ -11,7 +11,8 @@ class AnchorClicker(AnchorLayout):
         self.randy = ['top', 'center', 'bottom']
         self.shuffle()
         self.btn = Button(text = 'Нажми', size_hint = [0.3, 0.3])
-        self.btn.on_press = self.shuffle
+        #self.btn.on_press = self.shuffle
+        self.btn.bind(on_press = lambda x: self.shuffle())
         self.add_widget(self.btn)
         
     def shuffle(self):
