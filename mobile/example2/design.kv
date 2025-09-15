@@ -1,0 +1,21 @@
+<Button>:
+    font_size: 20
+
+<MyRootWidget>:
+    orientation: 'vertical'
+    padding: 20
+    spacing: 10
+
+    Label:
+        id: my_label
+        text: 'Жду нажатия кнопки...'
+        font_size: 24
+
+    Button:
+        text: 'Изменить текст'
+        on_press: root.press_callback(self)
+
+    Button:
+        text: 'Просто кнопка'
+<Button>:
+    font_size: 20

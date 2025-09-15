@@ -1,0 +1,30 @@
+<Slider>:
+    size_hint: [0.1, 0.1]
+
+<Colours>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1 
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Slider:
+        orientation: 'vertical'
+        min: 0
+        max: 1
+        step: 0.01
+        on_value: root.txt1(self)
+    Slider:
+        orientation: 'vertical'
+        min: 0
+        max: 1
+        step: 1/100
+        on_value: root.txt2(self)
+    Slider:
+        orientation: 'vertical'
+        min: 0
+        max: 1
+        step: 1/100
+        on_value: root.txt3(self)
