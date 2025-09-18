@@ -1,0 +1,14 @@
+<MainLayout>:
+    orientation: 'vertical'
+    BoxLayout:
+        size_hint_y: 0.1
+        orientation: 'horizontal'
+        TextInput:
+            id: text_input
+            size_hint_x: 0.7
+            placeholder: 'Введите предмет, который хотите добавить в список'
+            on_text_validate: root.add_task(self)
+
+        Button:
+            text: "Добавить"
+            on_press: root.add_task(text_input)
