@@ -1,0 +1,83 @@
+<Button>:
+    color: (0, 0, 0, 1)
+<Label>:
+    color: (0, 0, 0, 1)
+
+<MainScreen>:
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            pos: self.pos
+            size: root.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+        
+            BoxLayout:
+                size_hint_y: None #Изза него в маленькой линии
+                orientation: 'vertical'
+                id: productsList
+                height: self.minimum_height
+                spacing: 50
+        
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '50dp'
+            Button:
+                id: cancel
+                background_color: (1, 0, 0, 1)
+                size_hint_x: 0.4
+                text: 'Очистить\n корзину'
+                on_press: root.clear_cart()
+            Label:
+                size_hint_x: 0.2
+            Button:
+                id: next_scr
+                background_color: (0, 1, 0, 1)
+                size_hint_x: 0.4
+                text: 'Корзина'
+                on_press:
+                    root.manager.transition.direction = 'left' 
+                    root.manager.current = 'cart'
+
+
+<CartScreen>:
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            pos: self.pos
+            size: root.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+        
+            BoxLayout:
+                id: productsList
+                height: self.minimum_height
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '50dp'
+            Button:
+                background_color: (1, 0, 0, 1)
+                id: back
+                text: 'Назад'
+                on_press: 
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'main'
+
+            Button:
+                background_color: (0, 1, 0, 1)
+                id: buy
+                text: 'Оплатить'
+                on_press: root.buy()
