@@ -16,9 +16,9 @@
         ScrollView:
             do_scroll_x: False
             do_scroll_y: True
-        
+
             BoxLayout:
-                size_hint_y: None #Изза него в маленькой линии
+                size_hint_y: None
                 orientation: 'vertical'
                 id: productsList
                 height: self.minimum_height
@@ -35,6 +35,7 @@
                 text: 'Очистить\n корзину'
                 on_press: root.clear_cart()
             Label:
+                id: cost
                 size_hint_x: 0.2
             Button:
                 id: next_scr
@@ -61,8 +62,11 @@
             do_scroll_y: True
         
             BoxLayout:
+                size_hint_y: None
+                orientation: 'vertical'
                 id: productsList
                 height: self.minimum_height
+                spacing: 50
 
         BoxLayout:
             orientation: 'horizontal'

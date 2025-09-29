@@ -19,25 +19,71 @@ except:
         for el in file:
             pr = file[el]
             data.append((el, pr['Цена'], pr['Скидка'], pr['Цена со скидкой']))
+add_to_cart = {}
 print(data)
 
 class MainScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
+        self.summ = 0
         self.ly = self.ids.productsList
-        self.add_to_cart = {}
         for el in data:
-            btn = Button(text=f'{el[0]} | Было: {el[1]}₽ | Стало: {el[3]}₽')
-            btn.on_press = self.inf_to_cart
+            add_to_cart[el[0]] = 0
+            btn = Button(text=f'{el[0]} | Было: {el[1]}₽ | Стало: {el[3]}₽', size_hint_y = None, height = '50sp')
+            btn.bind(on_press = self.inf_to_cart)
             self.ly.add_widget(btn)
 
-    def inf_to_cart(self):
-        print('dasasada')
+    def inf_to_cart(self, obj):
+        add_to_cart[obj.text.split()[0]] += 1
+        self.summ = 0
+        for el in add_to_cart:
+            for i in range(add_to_cart[el]):
+                for i in range(len(data)):
+                    if data[i][0] == el:
+                        self.summ += data[i][3]
+                        break
+        self.ids.cost.text = str(self.summ)
+
+    def on_enter(self):
+        self.summ = 0
+        for el in add_to_cart:
+            for i in range(add_to_cart[el]):
+                for i in range(len(data)-1):
+                    if data[i][0] == el:
+                        self.summ += data[i][3]
+                        break
+        self.ids.cost.text = str(self.summ)
 
     def clear_cart(self):
-        pass
+        for el in add_to_cart:
+            add_to_cart[el] = 0
+        self.summ = 0
+        for el in add_to_cart:
+            for i in range(add_to_cart[el]):
+                for i in range(len(data)-1):
+                    if data[i][0] == el:
+                        self.summ += data[i][3]
+                        break
+        self.ids.cost.text = str(self.summ)
 
 class CartScreen(Screen):
+    def on_enter(self):
+        self.ly = self.ids.productsList
+        self.ly.clear_widgets()
+        for el in add_to_cart:
+            for el1 in data:
+                if el1[0] == el:
+                    price = el1[3]
+            if add_to_cart[el] != 0:
+                btn = Button(text=f'{el}, {add_to_cart[el]}, {price*add_to_cart[el]}', size_hint_y = None, height = '50sp')
+                btn.bind(on_press = self.update)
+                self.ly.add_widget(btn)
+    
+    def update(self, obj):
+        add_to_cart[obj.text.split(',')[0]] -= 1
+        self.on_enter()
+
+
     def buy(self):
         pass
 
