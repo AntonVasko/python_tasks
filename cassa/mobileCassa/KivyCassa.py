@@ -22,14 +22,18 @@ except:
 add_to_cart = {}
 print(data)
 
+class Product(Button):
+    pass
+
 class MainScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
         self.summ = 0
+        self.ids.cost.text = f'[b]{str(self.summ)}[/b]'
         self.ly = self.ids.productsList
         for el in data:
             add_to_cart[el[0]] = 0
-            btn = Button(text=f'{el[0]} | Было: {el[1]}₽ | Стало: {el[3]}₽', size_hint_y = None, height = '50sp')
+            btn = Product(text=f'{el[0]} | Было: [s]{el[1]}₽[/s] | Стало: [b]{el[3]}₽[/b]', size_hint_y = None, height = '50sp')
             btn.bind(on_press = self.inf_to_cart)
             self.ly.add_widget(btn)
 
@@ -42,7 +46,7 @@ class MainScreen(Screen):
                     if data[i][0] == el:
                         self.summ += data[i][3]
                         break
-        self.ids.cost.text = str(self.summ)
+        self.ids.cost.text = f'[b]{str(self.summ)}[/b]'
 
     def on_enter(self):
         self.summ = 0
@@ -52,7 +56,7 @@ class MainScreen(Screen):
                     if data[i][0] == el:
                         self.summ += data[i][3]
                         break
-        self.ids.cost.text = str(self.summ)
+        self.ids.cost.text = f'[b]{str(self.summ)}[/b]'
 
     def clear_cart(self):
         for el in add_to_cart:
@@ -64,7 +68,7 @@ class MainScreen(Screen):
                     if data[i][0] == el:
                         self.summ += data[i][3]
                         break
-        self.ids.cost.text = str(self.summ)
+        self.ids.cost.text = f'[b]{str(self.summ)}[/b]'
 
 class CartScreen(Screen):
     def on_enter(self):
@@ -75,7 +79,7 @@ class CartScreen(Screen):
                 if el1[0] == el:
                     price = el1[3]
             if add_to_cart[el] != 0:
-                btn = Button(text=f'{el}, {add_to_cart[el]}, {price*add_to_cart[el]}', size_hint_y = None, height = '50sp')
+                btn = Product(text=f'{el}, [u]{add_to_cart[el]}[/u], [b]{price*add_to_cart[el]}[/b]', size_hint_y = None, height = '50sp')
                 btn.bind(on_press = self.update)
                 self.ly.add_widget(btn)
     

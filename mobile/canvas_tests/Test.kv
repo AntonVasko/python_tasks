@@ -1,0 +1,29 @@
+<MyWidget@Widget>:
+    size_hint: None, None
+    size: 500, 500
+
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+        Color: 
+            rgba: 0, 1, 0, 0.65
+        BoxShadow:
+            inset: False
+            pos: self.pos
+            size: self.size
+            offset: 0, -10
+            blur_radius: 125
+            spread_radius: -50, -50
+            border_radius: 0, 25, 50, 100
+
+    Label:
+        id: my_label
+        text: 'Текст через kv'
+        text_size: root.size
+        pos: root.pos[0] + 10, root.pos[1] + 30
+        size_hint: None, None
+        size: root.size

@@ -1,7 +1,24 @@
-<Button>:
+<Product@Button>:
+    background_color: (1, 1, 1, 1)
+    background_normal: ""
     color: (0, 0, 0, 1)
+    markup: True
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+        Color:
+            rgba: 0, 0, 0, 1
+        BoxShadow:
+            pos: self.pos
+            size: self.size
+
 <Label>:
     color: (0, 0, 0, 1)
+    markup: True
 
 <MainScreen>:
     canvas.before:
@@ -30,7 +47,21 @@
             height: '50dp'
             Button:
                 id: cancel
-                background_color: (1, 0, 0, 1)
+                background_color: (0, 0, 0, 0)
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 0
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                    
+                    Color:
+                        rgba: 1, 0, 0, 1
+                    BoxShadow:
+                        pos: self.pos
+                        size: self.size
+                        border_radius: 20, 20, 20, 20
+                        blur_radius: 10
                 size_hint_x: 0.4
                 text: 'Очистить\n корзину'
                 on_press: root.clear_cart()
@@ -39,7 +70,21 @@
                 size_hint_x: 0.2
             Button:
                 id: next_scr
-                background_color: (0, 1, 0, 1)
+                background_color: (0, 0, 0, 0)
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 0
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                    
+                    Color:
+                        rgba: 0, 1, 0, 1
+                    BoxShadow:
+                        pos: self.pos
+                        size: self.size
+                        border_radius: 20, 20, 20, 20
+                        blur_radius: 10
                 size_hint_x: 0.4
                 text: 'Корзина'
                 on_press:
@@ -73,7 +118,21 @@
             size_hint_y: None
             height: '50dp'
             Button:
-                background_color: (1, 0, 0, 1)
+                background_color: (0, 0, 0, 0)
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 0
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                    
+                    Color:
+                        rgba: 1, 0, 0, 1
+                    BoxShadow:
+                        pos: self.pos
+                        size: self.size
+                        border_radius: 20, 20, 20, 20
+                        blur_radius: 10
                 id: back
                 text: 'Назад'
                 on_press: 
@@ -81,7 +140,21 @@
                     root.manager.current = 'main'
 
             Button:
-                background_color: (0, 1, 0, 1)
+                background_color: (0, 0, 0, 0)
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 0
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                    
+                    Color:
+                        rgba: 0, 1, 0, 1
+                    BoxShadow:
+                        pos: self.pos
+                        size: self.size
+                        border_radius: 20, 20, 20, 20
+                        blur_radius: 10
                 id: buy
                 text: 'Оплатить'
                 on_press: root.buy()

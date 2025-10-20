@@ -1,8 +1,8 @@
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from box import BoxClicker
-from anchor import AnchorClicker
-from gridl import BoxColours
+from apps_to_buildozer.anchor import AnchorClicker
+from apps_to_buildozer.gridl import BoxColours
 from stack import InfStack
 
 class comb(GridLayout):

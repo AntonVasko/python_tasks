@@ -1,0 +1,61 @@
+
+<ClickerScreen@MDScreen>:
+    md_bg_color: app.theme_cls.surfaceColor
+    MDButton:
+        style: "filled"
+        id: click
+        pos_hint: {"center_x": .5, "center_y": .9}
+        size_hint: [14, 14]
+        MDButtonIcon:
+            icon: "play-circle"
+    MDLabel:
+        id: clicks
+        text: '0 нажатий.'
+        pos_hint: {"center_x": .5}
+    MDNavigationBar:
+        id: bar
+        MDNavigationItem:
+            MDNavigationItemIcon:
+                icon: "gamepad-square"
+            MDNavigationItemLabel:
+                text: "Игра"
+        MDNavigationItem:
+            MDNavigationItemIcon:
+                icon: "shopping"
+            MDNavigationItemLabel:
+                text: "Магазин"
+
+<ShopScreen@MDScreen>:
+    md_bg_color: app.theme_cls.surfaceColor
+    MDSwiper:
+        id: swipe
+        size_hint_y: None
+        height: dp(200)
+        y: root.height - self.height
+        MDSwiperItem:
+            size_hint_y: None
+            height: swipe.height
+            MDButton:
+                id: first_upgrade
+                MDButtonIcon:
+                    icon: 'numeric-positive-1'
+                MDButtonText:
+                    text: 'Улучшение 1. Цена - 20 кликов.'
+        MDSwiperItem:
+            size_hint_y: None
+            height: swipe.height
+            MDButton:
+                id: second_upgrade
+                MDButtonIcon:
+                    icon: 'numeric-positive-2'
+                MDButtonText:
+                    text: 'Улучшение 2. Цена - 100 кликов.'
+        MDSwiperItem:
+            size_hint_y: None
+            height: swipe.height
+            MDButton:
+                id: third_upgrade
+                MDButtonIcon:
+                    icon: 'numeric-positive-3'
+                MDButtonText:
+                    text: 'Улучшение 3. Цена - 500 кликов.'
