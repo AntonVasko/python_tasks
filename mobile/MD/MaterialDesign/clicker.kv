@@ -15,11 +15,13 @@
     MDNavigationBar:
         id: bar
         MDNavigationItem:
+            id: toapp
             MDNavigationItemIcon:
                 icon: "gamepad-square"
             MDNavigationItemLabel:
                 text: "Игра"
         MDNavigationItem:
+            id: toshop
             MDNavigationItemIcon:
                 icon: "shopping"
             MDNavigationItemLabel:
@@ -28,34 +30,47 @@
 <ShopScreen@MDScreen>:
     md_bg_color: app.theme_cls.surfaceColor
     MDSwiper:
+        orientation: "vertical"
         id: swipe
+        size_hint_x: None
         size_hint_y: None
-        height: dp(200)
-        y: root.height - self.height
+        width: root.width
+        items_spacing: dp(0)
+        height: root.height - navi.height
+        pos_hint: {"center_x": 0.5}
+        y: navi.height + dp(200)
         MDSwiperItem:
-            size_hint_y: None
-            height: swipe.height
             MDButton:
                 id: first_upgrade
                 MDButtonIcon:
-                    icon: 'numeric-positive-1'
+                    icon: 'numeric-1'
                 MDButtonText:
                     text: 'Улучшение 1. Цена - 20 кликов.'
         MDSwiperItem:
-            size_hint_y: None
-            height: swipe.height
             MDButton:
                 id: second_upgrade
                 MDButtonIcon:
-                    icon: 'numeric-positive-2'
+                    icon: 'numeric-2'
                 MDButtonText:
                     text: 'Улучшение 2. Цена - 100 кликов.'
         MDSwiperItem:
-            size_hint_y: None
-            height: swipe.height
             MDButton:
                 id: third_upgrade
                 MDButtonIcon:
-                    icon: 'numeric-positive-3'
+                    icon: 'numeric-3'
                 MDButtonText:
                     text: 'Улучшение 3. Цена - 500 кликов.'
+    MDNavigationBar:
+        id: navi
+        MDNavigationItem:
+            id: toapp
+            MDNavigationItemIcon:
+                icon: "gamepad-square"
+            MDNavigationItemLabel:
+                text: "Игра"
+        MDNavigationItem:
+            id: toshop
+            MDNavigationItemIcon:
+                icon: "shopping"
+            MDNavigationItemLabel:
+                text: "Магазин"
