@@ -1,14 +1,13 @@
-from functools import wraps
-
-def decorator(func):
-    @wraps(func)
-    def wrapper(*args):
-        return func(*args) * 2
+def decorator(greet):
+    def wrapper(func):
+        def wrapped_wrapper(*args):
+            print(greet)
+            print(func(*args)) 
+        return wrapped_wrapper
     return wrapper
 
-@decorator
+@decorator(greet="Hello")
 def say_hi(*args):
-    """Самый обычный калькулятор"""
     if args[0] == "/":
         return args[1] / args[2]
     if args[0] == "*":
@@ -19,7 +18,5 @@ def say_hi(*args):
         return args[1] - args[2]
     if args[0] == "^":
         return args[1] ** args[2]
-
-print(say_hi("/", 1, 2))
-print(say_hi.__doc__)
-print(say_hi.__name__)
+    
+say_hi("/", 1, 2)
