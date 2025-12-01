@@ -1,6 +1,6 @@
 from random import randint
 
-class dec():
+class Dec():
     def __init__(self, login, password):
         self.login = login
         self.password = password
@@ -16,7 +16,7 @@ class dec():
             print("Неверный логин или пароль!")
         return new_func
 
-@dec(login="Oleg", password="qwerty1")
+@Decec(login="Oleg", password="qwerty1")
 def ran():
     return randint(0, 100)
 

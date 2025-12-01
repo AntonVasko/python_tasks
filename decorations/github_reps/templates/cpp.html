@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}C++{% endblock %}
+{% block reps %}{{ reps }}{% endblock %}
+{% block stars %}{{ stars }}{% endblock %}
+{% block forks %}{{ forks }}{% endblock %}
+{% block licenses %}
+{% for item in licenses %}
+<li>{{ item }}</li>
+{% endfor %}
+{% endblock %}

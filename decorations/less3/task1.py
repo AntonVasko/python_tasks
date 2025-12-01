@@ -6,11 +6,14 @@ class dec():
         self.data = {}
 
     def __call__(self):
-        self.data[self.func.__name__] = self.func()
+        if not self.func.__name__ in self.data:
+            self.data[self.func.__name__] = list()
+        self.data[self.func.__name__].append(self.func())
 
 @dec
 def ran():
     return randint(0, 100)
 
+ran()
 ran()
 print(ran.data)
