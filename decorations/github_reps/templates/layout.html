@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block style %}{% endblock %}
     <title>Document</title>
 </head>
 <body>
+    {% block img %}{% endblock %}
     <h1>Статистика репозиториев на языке {% block title%}{% endblock %}</h1>
     <p>Всего {% block reps %}{% endblock %} репозиториев. 
         В среднем на репозитории {% block stars %}{% endblock %} звёзд и {% block forks %}{% endblock %} форков. 
@@ -15,7 +17,7 @@
         </ol>
     </p>
     <p>
-        <form action="/" method="POST">
+        <form action="/logged" method="POST">
         <li><button type="submit">Вернуться назад</button></li>
         </form>
     </p>
