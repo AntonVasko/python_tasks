@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Добро пожаловать в магазин! Выберите, что хотите купить.</h1>
+    {% for product in products %}
+        <form method="post"><input type="submit" name="product" value={{ product[0] }}>
+        <s>{{ product[1] }}</s>
+        -{{ product[2] }}
+          <b>{{ product[3] }}</b></form>
+    {% endfor %}
+    <form method="get" action="/cart">
+        <input type=submit value="В корзину">
+    </form>
+</body>
+</html>
