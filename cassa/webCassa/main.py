@@ -53,8 +53,11 @@ def shop():
 @app.route("/cart", methods=["POST", "GET"])
 def cart():
     if request.method == "POST":
-        print(request.form["product"])
-    print(session["cart"])
+        if request.form["product"]:
+            session["cart"][request.form["product"]] -= 1
+        elif request.form["clear"]:
+            print("clear")
+        session.modified = True
     return render_template("cart.html", cart=session["cart"])
 
 @app.errorhandler(500)

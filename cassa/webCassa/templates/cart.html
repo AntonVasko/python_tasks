@@ -10,11 +10,14 @@
     <form method="get" action="/shop">
         <input type=submit value=Назад>
     </form>
+    <form method="post" action="/cart">
+        <input type=submit value="Очистить корзину" name = "clear">
+    </form>
     {% for product in cart %}
         {% if cart[product] > 0 %}
-        <form method="post"><input type="submit" name="product" value={{ product }}>
+        <form method="post" action = "/cart"><input type=submit value= {{ product }} name="product">
         {{ cart[product] }}
-        <br>
+        </form>
         {% endif %}
     {% endfor %}
     <form method="post" action="/cart">
