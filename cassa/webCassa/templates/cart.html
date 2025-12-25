@@ -11,12 +11,10 @@
         <input type=submit value=Назад>
     </form>
     {% for product in cart %}
-        {{ product }}
         {% if cart[product] > 0 %}
-        <form method="post"><input type="submit" name="product" value={{ product[0] }}>
-        <s>{{ product[1] }}</s>
-        -{{ product[2] }}
-          <b>{{ product[3] }}</b></form>
+        <form method="post"><input type="submit" name="product" value={{ product }}>
+        {{ cart[product] }}
+        <br>
         {% endif %}
     {% endfor %}
     <form method="post" action="/cart">

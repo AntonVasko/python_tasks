@@ -33,7 +33,6 @@ def login():
             session["cart"] = dict()
             for el in data:
                 session["cart"][el[0]] = 0
-            session["cart"]["Молоко"] = 15
             return redirect(url_for("shop"))
     return """
     <form method="post">
@@ -48,6 +47,7 @@ def shop():
         print(request.form["product"])
         print(session["cart"][request.form["product"]])
         session["cart"][request.form["product"]] += 1
+        session.modified = True
     return render_template("products.html", products=data)
 
 @app.route("/cart", methods=["POST", "GET"])
@@ -55,7 +55,12 @@ def cart():
     if request.method == "POST":
         print(request.form["product"])
     print(session["cart"])
-    return render_template("cart.html", products=session["cart"])
+    return render_template("cart.html", cart=session["cart"])
+
+@app.errorhandler(500)
+def not_registrated(error):
+    return """<h3>Вы не зарегестрированы!
+    <form method="GET" action="/"><input type="submit" value="Регистрация">"""
 
 if __name__ == "__main__":
     app.run()
